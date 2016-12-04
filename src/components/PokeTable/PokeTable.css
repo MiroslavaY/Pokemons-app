@@ -1,0 +1,22 @@
+.PokeTable table {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+}
+
+
+.PokeTable td,
+.PokeTable th {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.PokeTable th {
+    background-color: #ddd;
+}
+
+.PokeTable tr td:last-child,
+.PokeTable tr th:last-child{
+    width: 100%;
+}

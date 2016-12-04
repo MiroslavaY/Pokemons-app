@@ -3,7 +3,7 @@
 }
 
 .App-indicator {
-  animation: App-indicator-spin infinite 20s linear;
+  animation: App-indicator-spin infinite 10s linear;
   height: 80px;
 }
 
