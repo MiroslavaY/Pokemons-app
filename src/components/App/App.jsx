@@ -1,5 +1,5 @@
 import React  from 'react';
-import Pokemon from '../Pokemon/Pokemon.js';
+import Pokemon from '../Pokemon/Pokemon.jsx';
 import axios from 'axios';
 import './App.css';
 import logo from '../../images/logo.svg';
@@ -7,7 +7,7 @@ import LoadingIndicator from 'react-loading-indicator';
 
 
 
-class App extends React.Component {
+export default class App extends React.Component {
 
     constructor() {
         super();
@@ -67,7 +67,10 @@ class App extends React.Component {
 
             <div className="App">
                 <div className="App-header">
-                    <img src={logo} className="App-indicator" alt="indicator"/>
+                    <img
+                        src={logo}
+                        className="App-indicator"
+                        alt="indicator"/>
                     <h1>Pokemons App</h1>
                 </div>
                 <p className="App-intro">
@@ -91,4 +94,3 @@ class App extends React.Component {
     }
 }
 
-export default App;

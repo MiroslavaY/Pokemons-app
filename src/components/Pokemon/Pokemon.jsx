@@ -1,11 +1,11 @@
 import React from 'react';
-import PokeTable from '../PokeTable/PokeTable.js';
+import PokeTable from '../PokeTable/PokeTable.jsx';
 import axios from 'axios';
 import './Pokemon.css';
 import defaultPhoto from '../../images/pokeball.png';
 import LoadingIndicator from 'react-loading-indicator';
 
-class Pokemon extends React.Component {
+export default class Pokemon extends React.Component {
 
     constructor() {
         super();
@@ -93,4 +93,4 @@ class Pokemon extends React.Component {
     }
 }
 
-export default Pokemon;
+

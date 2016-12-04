@@ -1,7 +1,7 @@
 import React from 'react';
 import './PokeTable.css';
 
-class PokeTable extends React.Component {
+export default class PokeTable extends React.Component {
     render() {
         return (
                 <table className="PokeTable">
@@ -28,5 +28,3 @@ class PokeTable extends React.Component {
         );
     }
 }
-
-export default PokeTable;
