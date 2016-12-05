@@ -30,7 +30,7 @@ export default class Pokemon extends React.Component {
     parseUrl() {
 
         const urlTemplate = /http:\/\/pokeapi\.co\/api\/v2\/pokemon\//;
-        const id = parseInt(this.props.pUrl.replace(urlTemplate, ''));
+        const id = parseInt(this.props.pUrl.replace(urlTemplate, ''), 10);
         this.setState({
             id: id,
             imgUrl: `http://pokeapi.co/media/sprites/pokemon/${this.state.id}.png`

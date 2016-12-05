@@ -49,7 +49,7 @@ export default class App extends React.Component {
 
         const html = document.documentElement,
             body = document.body,
-            scrollTop = html.scrollTop || body && body.scrollTop || 0;
+            scrollTop = html.scrollTop || (body && body.scrollTop )|| 0;
 
         let inProgress = false;
 
@@ -78,8 +78,8 @@ export default class App extends React.Component {
                 </p>
                 {
                     (this.state.isLoaded ) ?
-                        this.state.pokemons.map((pokemon) => {
-                            return <Pokemon key={pokemon.url} pName={pokemon.name} pUrl={pokemon.url}/>;
+                        this.state.pokemons.map((pokemon, i) => {
+                            return <Pokemon key={i} pName={pokemon.name} pUrl={pokemon.url}/>;
                         }) :
 
                         <LoadingIndicator
