@@ -4,7 +4,6 @@
     text-align: center;
 }
 
-
 .PokeTable td,
 .PokeTable th {
     border: 1px solid #ddd;
@@ -17,6 +16,6 @@
 }
 
 .PokeTable tr td:last-child,
-.PokeTable tr th:last-child{
+.PokeTable tr th:last-child {
     width: 100%;
 }

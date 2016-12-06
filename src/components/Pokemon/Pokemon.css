@@ -1,21 +1,18 @@
-.Pokemon{
+.Pokemon {
     width: 40%;
     margin: 0 auto 2px auto;
     border: 1px solid #000;
 
 }
 
-.Pokemon h3{
+.Pokemon h3 {
     color: #620011;
     text-transform: uppercase;
     font-size: 2rem;
 }
 
-.Pokemon a{
-    color: #000;
+.Pokemon button {
+    margin: 0 auto;
     display: block;
     cursor: pointer;
-}
-.Pokemon a:hover{
-    text-decoration: underline;
 }

@@ -6,91 +6,111 @@ import logo from '../../images/logo.svg';
 import LoadingIndicator from 'react-loading-indicator';
 
 
-
 export default class App extends React.Component {
 
-    constructor() {
-        super();
-        this.state = {
-            pokemons: [],
-            offset: 0,
-            limit: 25,
-            isLoaded: false
-        };
-        this.loadData = this.loadData.bind(this);
-        this.scrollHandler = this.scrollHandler.bind(this);
-    }
 
-    componentDidMount() {
-        this.loadData();
-        window.addEventListener('scroll', this.scrollHandler);
+  constructor() {
+    super();
+    this.state = {
+      pokemons: [],
+      offset: 0,
+      isLoaded: false
     };
 
-    componentWillUnmount() {
-        this.serverRequest.abort();
-        window.removeEventListener('scroll', this.scrollHandler);
+    this.LIMIT = 25;
+
+    this.parseUrl = this.parseUrl.bind(this);
+    this.loadData = this.loadData.bind(this);
+    this.scrollHandler = this.scrollHandler.bind(this);
+  }
+
+  componentDidMount() {
+    this.loadData();
+    window.addEventListener('scroll', this.scrollHandler);
+
+  };
+
+  componentWillUnmount() {
+    this.serverRequest.abort();
+    window.removeEventListener('scroll', this.scrollHandler);
+
+  }
+
+  loadData() {
+    let _this = this;
+    this.serverRequest =
+      axios.get(`http://pokeapi.co/api/v2/pokemon/?limit=${this.state.limit}&offset=${this.state.offset}`)
+        .then((result) => {
+          let pokeObj = result.data.results.map((el) =>{
+            return Object.assign({}, el, {id: _this.parseUrl(el.url)})
+          });
+
+
+          _this.setState({
+            pokemons: this.state.pokemons.concat(pokeObj),
+            offset: this.state.offset + this.LIMIT,
+            isLoaded: true
+          });
+
+        });
+  }
+
+  scrollHandler() {
+
+    const html = document.documentElement,
+      body = document.body,
+      scrollTop = html.scrollTop || (body && body.scrollTop ) || 0;
+
+    if (html.clientHeight + scrollTop >= html.scrollHeight) {
+      this.loadData();
     }
+  }
 
-    loadData() {
-        let _this = this;
-        this.serverRequest =
-            axios.get(`http://pokeapi.co/api/v2/pokemon/?limit=${this.state.limit}&offset=${this.state.offset}`)
-                .then((result) => {
-                    _this.setState({
-                        pokemons: this.state.pokemons.concat(result.data.results),
-                        offset: this.state.offset + this.state.limit,
-                        isLoaded: true
-                    });
+   parseUrl(url) {
 
-                });
-    }
+   const urlTemplate = /http:\/\/pokeapi\.co\/api\/v2\/pokemon\//;
+   return parseInt(url.replace(urlTemplate, ''), 10);
 
-    scrollHandler() {
+   };
+  render() {
 
-        const html = document.documentElement,
-            body = document.body,
-            scrollTop = html.scrollTop || (body && body.scrollTop )|| 0;
-
-        let inProgress = false;
-
-        if (html.clientHeight + scrollTop >= html.scrollHeight && !inProgress) {
-            this.loadData();
-            inProgress = true;
-        }
-
-    }
-
-    render() {
-
-        return (
+    return (
 
 
-            <div className="App">
-                <div className="App-header">
-                    <img
-                        src={logo}
-                        className="App-indicator"
-                        alt="indicator"/>
-                    <h1>Pokemons App</h1>
-                </div>
-                <p className="App-intro">
-                    List of pokemons
-                </p>
-                {
-                    (this.state.isLoaded ) ?
-                        this.state.pokemons.map((pokemon, i) => {
-                            return <Pokemon key={i} pName={pokemon.name} pUrl={pokemon.url}/>;
-                        }) :
+      <div  className="App">
+        <div className="App-header">
+          <img
+            src={logo}
+            className="App-indicator"
+            alt="indicator"/>
+          <h1>Pokemons App</h1>
+        </div>
+        <p className="App-intro">
+          List of pokemons
+        </p>
+        <div onScroll={this.scrollHandler}>
+          {
+            (this.state.isLoaded ) ?
+              this.state.pokemons.map((pokemon) => {
+                return <Pokemon
+                  id={pokemon.id}
+                  key={pokemon.name}
+                  name={pokemon.name}
+                  url={pokemon.url}
+                />;
+              }) :
 
-                        <LoadingIndicator
-                            color={{red: 97, green: 218, blue: 251, alpha:1}}
-                            segmentWidth={10}
-                            segmentLength={20}
-                        />
-                }
+              <LoadingIndicator
+                color={{red: 97, green: 218, blue: 251, alpha: 1}}
+                segmentWidth={10}
+                segmentLength={20}
+              />
+          }
+        </div>
 
-            </div>
-        );
-    }
+
+      </div>
+    );
+  }
 }
 

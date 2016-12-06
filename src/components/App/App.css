@@ -1,24 +1,28 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-indicator {
-  animation: App-indicator-spin infinite 10s linear;
-  height: 80px;
+    animation: App-indicator-spin infinite 10s linear;
+    height: 80px;
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+    background-color: #222;
+    height: 150px;
+    padding: 20px;
+    color: white;
 }
 
 .App-intro {
-  font-size: large;
+    font-size: large;
 }
 
 @keyframes App-indicator-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

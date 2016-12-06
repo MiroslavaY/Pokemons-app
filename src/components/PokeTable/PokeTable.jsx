@@ -2,29 +2,30 @@ import React from 'react';
 import './PokeTable.css';
 
 export default class PokeTable extends React.Component {
-    render() {
-        return (
-            <table className="PokeTable">
+  render() {
+    return (
+      <table className="PokeTable">
 
-                <tbody>
-                <tr>
-                    <th>Height</th>
-                    <th>Weight</th>
-                    <th>Abilities</th>
-                </tr>
-                <tr>
-                    <td>{this.props.pHeight}</td>
-                    <td>{this.props.pWeight}</td>
-                    <td>{
-                        this.props.abilities.map((el, i)=> {
-                            return <p key={i}>{el.ability.name}</p>
-                        })
+        <tbody>
+        <tr>
+          <th>Height</th>
+          <th>Weight</th>
+          <th>Abilities</th>
+        </tr>
+        <tr>
+          <td>{this.props.height}</td>
+          <td>{this.props.weight}</td>
+          <td>
+            {
+              this.props.abilities.map((el)=> {
+                return <p key={`${el.ability.name}-for-${this.props.name}`}>{el.ability.name}</p>
+              })
+            }
+          </td>
+        </tr>
+        </tbody>
 
-                    }</td>
-                </tr>
-                </tbody>
-
-            </table>
-        );
-    }
+      </table>
+    );
+  }
 }
